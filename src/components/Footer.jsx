@@ -1,8 +1,24 @@
 import React from 'react';
 import { Compass, Mail, Phone, MapPin, Instagram, Twitter, Facebook, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export default function Footer() {
+    const navigate = useNavigate();
+
+    const handleAnimatedNav = (e, path, name) => {
+        e.preventDefault();
+        toast(`Opening ${name}...`, { 
+            icon: '✈️', 
+            duration: 1500,
+            style: { background: '#10b981', color: '#fff', fontWeight: 'bold', borderRadius: '1rem' }
+        });
+        setTimeout(() => {
+            navigate(path);
+            window.scrollTo(0, 0);
+        }, 400);
+    };
+
     return (
         <footer className="bg-slate-900 border-t border-slate-800 text-slate-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -44,12 +60,12 @@ export default function Footer() {
                     <div>
                         <h3 className="text-white font-bold text-lg mb-6 tracking-wide">Company</h3>
                         <ul className="space-y-4">
-                            <li><Link to="/about" className="text-slate-400 font-medium hover:text-emerald-400 transition-colors">About Us</Link></li>
-                            <li><Link to="/contact" className="text-slate-400 font-medium hover:text-emerald-400 transition-colors">Contact Us</Link></li>
-                            <li><Link to="/profile" className="text-slate-400 font-medium hover:text-emerald-400 transition-colors">My Profile</Link></li>
-                            <li><Link to="/vendor" className="text-slate-400 font-medium hover:text-amber-400 transition-colors">Vendor Portal</Link></li>
-                            <li><a href="#" className="text-slate-400 font-medium hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
-                            <li><a href="#" className="text-slate-400 font-medium hover:text-emerald-400 transition-colors">Terms &amp; Conditions</a></li>
+                            <li><button onClick={(e) => handleAnimatedNav(e, '/about', 'About Us')} className="text-slate-400 font-medium hover:text-emerald-400 active:scale-90 active:text-emerald-300 transition-all flex items-center gap-2">About Us</button></li>
+                            <li><button onClick={(e) => handleAnimatedNav(e, '/contact', 'Contact Us')} className="text-slate-400 font-medium hover:text-emerald-400 active:scale-90 active:text-emerald-300 transition-all flex items-center gap-2">Contact Us</button></li>
+                            <li><button onClick={(e) => handleAnimatedNav(e, '/profile', 'My Profile')} className="text-slate-400 font-medium hover:text-emerald-400 active:scale-90 active:text-emerald-300 transition-all flex items-center gap-2">My Profile</button></li>
+                            <li><button onClick={(e) => handleAnimatedNav(e, '/vendor', 'Vendor Portal')} className="text-slate-400 font-medium hover:text-amber-400 active:scale-90 active:text-amber-300 transition-all flex items-center gap-2">Vendor Portal</button></li>
+                            <li><button onClick={(e) => handleAnimatedNav(e, '/privacy', 'Privacy Policy')} className="text-slate-400 font-medium hover:text-emerald-400 active:scale-90 transition-all flex items-center gap-2">Privacy Policy</button></li>
+                            <li><button onClick={(e) => handleAnimatedNav(e, '/terms', 'Terms & Conditions')} className="text-slate-400 font-medium hover:text-emerald-400 active:scale-90 transition-all flex items-center gap-2">Terms &amp; Conditions</button></li>
                         </ul>
                     </div>
 

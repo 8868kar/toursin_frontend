@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Search, Map, BookOpen, User, BookCheck, ChevronDown, X, MapPin, Calendar, Menu, Sun, Moon, LogOut } from 'lucide-react';
+import { Search, Map, BookOpen, User, BookCheck, ChevronDown, X, MapPin, Calendar, Menu, Sun, Moon, LogOut, Info, Phone } from 'lucide-react';
 import { useAuthStore } from '../store/useStore';
+import toast from 'react-hot-toast';
 
 export default function Header({ onLoginClick }) {
     const [activePopup, setActivePopup] = useState(null); // 'search', 'destinations', 'bookings', 'blogs', 'profile'
@@ -41,6 +42,21 @@ export default function Header({ onLoginClick }) {
 
     const togglePopup = (popupName) => {
         setActivePopup(activePopup === popupName ? null : popupName);
+    };
+
+    const handleAnimatedNav = (e, path, name) => {
+        e.preventDefault();
+        setIsMobileMenuOpen(false);
+        setActivePopup(null);
+        toast(`Opening ${name}...`, { 
+            icon: '✨', 
+            duration: 1500,
+            style: { background: '#10b981', color: '#fff', fontWeight: 'bold', borderRadius: '1rem' }
+        });
+        setTimeout(() => {
+            navigate(path);
+            window.scrollTo(0, 0);
+        }, 400);
     };
 
     const destinations = [
@@ -160,20 +176,26 @@ export default function Header({ onLoginClick }) {
 
                 {/* Mobile Menu Dropdown */}
                 {isMobileMenuOpen && (
-                    <div className="absolute top-16 left-0 w-full bg-white border-b border-slate-200 shadow-xl flex flex-col items-center py-6 gap-6 md:hidden z-[60] animate-in slide-in-from-top-4">
-                        <button onClick={() => togglePopup('search')} className="text-lg font-bold text-slate-600 flex items-center gap-2">
+                    <div className="absolute top-16 left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-xl flex flex-col items-center py-6 gap-6 md:hidden z-[60] animate-in slide-in-from-top-4">
+                        <button onClick={() => togglePopup('search')} className="text-lg font-bold text-slate-600 dark:text-slate-300 flex items-center gap-2 active:scale-90 transition-transform">
                             <Search size={20} /> Search
                         </button>
-                        <button onClick={() => handleNavClick('tours')} className="text-lg font-bold text-slate-600">
+                        <button onClick={() => handleNavClick('tours')} className="text-lg font-bold text-slate-600 dark:text-slate-300 active:scale-90 transition-transform">
                             Tours
                         </button>
-                        <button onClick={() => handleNavClick('packages')} className="text-lg font-bold text-slate-600">
+                        <button onClick={() => handleNavClick('packages')} className="text-lg font-bold text-slate-600 dark:text-slate-300 active:scale-90 transition-transform">
                             Packages
                         </button>
-                        <button onClick={() => handleNavClick('destinations')} className="text-lg font-bold text-slate-600">
+                        <button onClick={() => handleNavClick('destinations')} className="text-lg font-bold text-slate-600 dark:text-slate-300 active:scale-90 transition-transform">
                             Destinations
                         </button>
-                        <button onClick={() => togglePopup('blogs')} className="text-lg font-bold text-slate-600 flex items-center gap-2">
+                        <button onClick={(e) => handleAnimatedNav(e, '/about', 'About Us')} className="text-lg font-bold text-slate-600 dark:text-slate-300 flex items-center gap-2 active:scale-90 transition-transform">
+                            <Info size={20} /> About Us
+                        </button>
+                        <button onClick={(e) => handleAnimatedNav(e, '/contact', 'Contact Us')} className="text-lg font-bold text-slate-600 dark:text-slate-300 flex items-center gap-2 active:scale-90 transition-transform">
+                            <Phone size={20} /> Contact Us
+                        </button>
+                        <button onClick={() => togglePopup('blogs')} className="text-lg font-bold text-slate-600 dark:text-slate-300 flex items-center gap-2 active:scale-90 transition-transform">
                             <BookOpen size={20} /> Blogs
                         </button>
                     </div>
@@ -311,12 +333,12 @@ export default function Header({ onLoginClick }) {
                                             <div className="border-t border-slate-100 dark:border-slate-800 mt-2 p-2 gap-2 flex flex-col">
                                                 {isAuthenticated ? (
                                                     <>
-                                                        <Link to="/profile" className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2">
+                                                        <button onClick={(e) => handleAnimatedNav(e, '/profile', 'User Profile')} className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2">
                                                             View Full Profile
-                                                        </Link>
+                                                        </button>
                                                         <button
                                                             onClick={() => { setActivePopup(null); logout(); }}
-                                                            className="w-full py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl font-bold transition-colors flex items-center justify-center gap-2"
+                                                            className="w-full py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2"
                                                         >
                                                             <LogOut size={16} /> Log Out
                                                         </button>
@@ -324,7 +346,7 @@ export default function Header({ onLoginClick }) {
                                                 ) : (
                                                     <button
                                                         onClick={() => { setActivePopup(null); onLoginClick(); }}
-                                                        className="w-full py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl font-bold transition-colors flex items-center justify-center gap-2"
+                                                        className="w-full py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2"
                                                     >
                                                         Log In or Register
                                                     </button>
