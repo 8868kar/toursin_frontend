@@ -133,10 +133,16 @@ export default function Header({ onLoginClick }) {
                         </div>
 
                         {/* Mobile Menu Toggle */}
-                        <div className="md:hidden flex items-center gap-4">
+                        <div className="md:hidden flex items-center gap-3">
+                            <button
+                                onClick={toggleTheme}
+                                className="flex items-center justify-center h-8 w-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                            >
+                                {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
+                            </button>
                             <button
                                 onClick={() => togglePopup('profile')}
-                                className="flex items-center gap-2 transition-colors pl-2 pr-1 py-1 rounded-full border border-slate-200 bg-white shadow-sm"
+                                className="flex items-center gap-2 transition-colors pl-2 pr-1 py-1 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm"
                             >
                                 <div className="h-6 w-6 bg-emerald-600 rounded-full flex items-center justify-center text-white">
                                     <User size={12} />
