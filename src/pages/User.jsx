@@ -32,14 +32,14 @@ export default function User() {
 
                 {/* Hero Headline */}
                 <div className="max-w-4xl mx-auto text-center mt-12 lg:mt-20 mb-8 lg:mb-12 relative z-20 px-4">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 shadow-sm">
-                        <Sparkles size={16} className="text-amber-300" />
-                        <span className="text-white text-sm font-bold tracking-widest uppercase">Uncover the Unseen</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/10 dark:bg-white/10 backdrop-blur-md border border-slate-900/20 dark:border-white/20 mb-6 shadow-sm">
+                        <Sparkles size={16} className="text-amber-500 dark:text-amber-300" />
+                        <span className="text-slate-800 dark:text-white text-sm font-bold tracking-widest uppercase">Uncover the Unseen</span>
                     </div>
-                    <h1 className="text-5xl md:text-7xl lg:text-[5rem] font-black text-white mb-6 tracking-tight leading-[1.1] drop-shadow-2xl">
-                        Journey Beyond The <br className="hidden md:block" /><span className="text-emerald-400 italic">Ordinary.</span>
+                    <h1 className="text-5xl md:text-7xl lg:text-[5rem] font-black text-slate-900 dark:text-white mb-6 tracking-tight leading-[1.1] drop-shadow-2xl">
+                        Journey Beyond The <br className="hidden md:block" /><span className="text-emerald-600 dark:text-emerald-400 italic">Ordinary.</span>
                     </h1>
-                    <p className="text-lg md:text-xl lg:text-2xl text-slate-200 font-medium max-w-2xl mx-auto drop-shadow-md">
+                    <p className="text-lg md:text-xl lg:text-2xl text-slate-700 dark:text-slate-200 font-medium max-w-2xl mx-auto drop-shadow-md">
                         Discover breathtaking landscapes and rich heritage with our exclusively curated North Indian expeditions.
                     </p>
                 </div>
